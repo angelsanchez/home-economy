@@ -24,6 +24,11 @@ function importFrom(importFolder, callback) {
 
   transactions = [];
 
+  if (!fs.existsSync(importFolder)) {
+    msg = 'Error: folder[' + importFolder + '] not found';
+    return callback(null, msg);
+  }
+
   fs.readdirSync(importFolder).forEach(function(filename) {
     if (filename.indexOf('.') !== 0) xlsxToTransactions(path.join(importFolder, filename));
   });
