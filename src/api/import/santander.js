@@ -4,7 +4,8 @@ var XLSX = require('xlsx'),
   Transaction = require('../model/transaction'),
   mongoose = require('mongoose'),
   transactions,
-  colMap;
+  colMap,
+  conn;
 
 module.exports = {
   importFrom: importFrom
@@ -28,7 +29,7 @@ function importFrom(importFolder, callback) {
   });
 
   msg += '\nConnection to Mongodb...';
-  mongoose.connect('mongodb://localhost/home_economy', function() {
+  conn = mongoose.connect('mongodb://localhost/home_economy', function() {
     mongoose.connection.db.dropDatabase(function(err) {
       if (err) throw err;
       msg += '\nDB dropped';

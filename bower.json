@@ -1,0 +1,12 @@
+{
+  "name": "home-economy",
+  "version": "0.1.0",
+  "main": "src/index.html",
+  "ignore": [
+    "**/.*",
+    "lib"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.3.2"
+  }
+}

@@ -2,6 +2,12 @@
 
 ## Development
 
+### Install bower dependencies
+
+```sh
+$ ./node_modules/bower/bin/bower install
+```
+
 ### Run
 
 ```sh
