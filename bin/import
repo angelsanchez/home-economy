@@ -1,0 +1,31 @@
+#!/usr/bin/env node
+
+var importer = require('../src/scripts/import'),
+  argv = require('yargs')
+    .usage('Import files.\nUsage: $0')
+    .example('$0 -p <path> -b <bank> [-r] [-t]', 'import all files in path')
+
+    .demand('p')
+    .alias('p', 'path')
+    .describe('p', 'path to files')
+
+    .demand('b')
+    .alias('b', 'bank')
+    .describe('b', 'bank type')
+
+    .alias('t', 'truncate')
+    .describe('t', 'truncate db')
+    .default('t', false)
+
+    .alias('r', 'recursive')
+    .describe('r', 'recursive')
+    .default('r', false)
+
+    .argv;
+
+importer.run({
+  type: argv.bank,
+  path: argv.path,
+  truncate: argv.truncate,
+  recursive: argv.recursive
+});

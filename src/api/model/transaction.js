@@ -3,20 +3,19 @@ var mongoose = require('mongoose'),
   Transaction;
 
 transactionSchema = mongoose.Schema({
-  opDate: Date,
-  valDate: Date,
   ds: String,
   type: String,
-  company: {type: String, optional: true},
-  creditCard: {type: String, optional: true},
+  amount: Number,
+  balance: Number,
+  fee: {type: Number, optional: true},
+  date: Date,
+  valDate: {type: Date, optional: true},
+  atmDate: {type: Date, optional: true},
   purchaseDate: {type: Date, optional: true},
+  company: {type: String, optional: true},
   concept: {type: String, optional: true},
   from: {type: String, optional: true},
-  fee: {type: Number, optional: true},
-  atmDate: {type: Date, optional: true},
-  balance: Number,
-  amount: Number
-
+  creditCard: {type: String, optional: true}
 }, {versionKey: false});
 
 Transaction = mongoose.model('Transaction', transactionSchema);

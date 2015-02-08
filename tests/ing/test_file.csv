@@ -1,0 +1,12 @@
+'Número de cuenta:','11111111111111111111',,
+'Titular:','MISTER PETERSEN',,
+,,,
+'FECHA','DESCRIPCIÓN','IMPORTE (€)','SALDO (€)'
+'03/12/2014','Traspaso emitido OTRA CUENTA','-1.000,00 €','400,00 €'
+'19/11/2014','Reintegro efectivo tarjeta NOMBRE CAJERO','-500,00 €','1.400,00 €'
+'11/11/2014','Pago en Casa Empeño','-50,00 €','1.900,00 €'
+'30/09/2014','Traspaso emitido OTRA CUENTA','-50,00 €','1.950,00 €'
+'29/09/2014','Nomina recibida PAGADOR','1.000,00 €','2.000,00 €'
+'05/08/2014','Transferencia recibida','600,00 €','1.000,00 €'
+'02/07/2014','Compra Tarjeta METRO','-50,00 €','500,00 €'
+'02/07/2014','Pago tarjeta','-50,00 €','550,00 €'

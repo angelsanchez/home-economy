@@ -22,6 +22,21 @@ $ npm run lint
 ## App info 
 
 
+### Import file from CLI
+
+```sh
+    $> node ./bin/import --path /tmp --bank ing --recursive --truncate 
+    
+    // output:
+    connecting to mongo
+    dropping database
+    starting import for ing in /tmp/**/*.csv
+    importing file /tmp/test_file.csv
+    closing connection
+    process complete
+    files: 1  txs: 8 errs: 0
+```
+
 
 ### Transaction fields
 
