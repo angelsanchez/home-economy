@@ -1,5 +1,6 @@
 var _ = require('lodash'),
-  moment = require('moment');
+  moment = require('moment'),
+  IngStrategy;
 
 module.exports = IngStrategy = function(opts) {
   this.opts = opts;
@@ -27,26 +28,6 @@ module.exports = IngStrategy = function(opts) {
       '^Nomina recibida'
     ]
   };
-
-};
-
-IngStrategy.prototype.isType = function(type, row) {
-  var desc = row.description;
-  var _this = this;
-
-  // if type is already set, don't match again
-  if (row.type) {
-    return row.type === type;
-  }
-  // get the type from the first matching pattern against the description
-  return _.some(this.patterns[type], function(pattern) {
-    var re = new RegExp(pattern, 'i');
-    if (re.test(desc)) {
-      _this._typeRE = re; // save RegExp to extract data
-      return true;
-    }
-    return false;
-  });
 
 };
 

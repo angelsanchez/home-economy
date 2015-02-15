@@ -47,7 +47,7 @@ __type__        | String | required | Transaction type          | santander, ing
 __amount__      | Number | required | Amount of money transfered| santander, ing
 __balance__     | Number | required | Account balance after TX  | santander, ing
 __fee__         | Number | optiona  | Charged fee in a TX       | santander
-__opDate__      | Date   | required | Transaction's date        | santander, ing
+__date__        | Date   | required | Transaction's date        | santander, ing
 __valDate__     | Date   | optional | Validation date           | santander
 __atmDate__     | Date   | optional | ATM withdraw date         | santander
 __purchaseDate__| Date   | optional | Date for purchase TX      | santander

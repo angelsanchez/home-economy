@@ -20,7 +20,7 @@ module.exports = {
 
     var type = opts.type,
       recursive = opts.recursive,
-      paths = path.resolve(opts.path) + (recursive ? '/**/' : '/') + '*.csv';
+      paths = path.resolve(opts.path) + (recursive ? '/**/' : '/');
 
     processCallback = (processCallback || endImport);
 
@@ -38,7 +38,6 @@ module.exports = {
       },
       process: function(next) {
         console.log('starting import for %s in %s', type, paths);
-
         importFiles(type, paths, next);
 
       },
@@ -57,16 +56,15 @@ module.exports = {
 
 function importFiles(type, path, filesCallback) {
 
-  glob(path, function(err, files) {
+  var typeReader = reader.create(type),
+    typeAnalyzer = analyzer.create(type);
+
+  glob(path + typeReader.fileExtension, function(err, files) {
     if (err) throw err;
 
     async.map(_.flatten(files), function(file, fileCallback) {
 
-      var typeAnalyzer = analyzer.create(type);
-      var typeReader = reader.create(type);
-
       console.log('importing file %s', file);
-
       stats.files += 1;
 
       typeReader.mapLines(file, function(row, cb) {
@@ -92,7 +90,7 @@ function insertTransaction(row, callback) {
   if (!row.type) {
     return callback(new Error('row without type'));
   }
-  tx = new Transaction(row);
+  var tx = new Transaction(row);
   tx.save(callback);
 }
 

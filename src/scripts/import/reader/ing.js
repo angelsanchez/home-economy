@@ -12,6 +12,7 @@ var cvsStreamOptions = {
 var SKIP_ROWS = 4;
 
 module.exports = {
+  fileExtension: '*.csv',
   mapLines: function(file, lineIterator, callback) {
     var row = 1;
     var csvStream = csv.createStream(cvsStreamOptions);
