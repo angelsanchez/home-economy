@@ -87,9 +87,6 @@ function importFiles(type, path, filesCallback) {
 }
 
 function insertTransaction(row, callback) {
-  if (!row.type) {
-    return callback(new Error('row without type'));
-  }
   var tx = new Transaction(row);
   tx.save(callback);
 }

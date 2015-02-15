@@ -23,8 +23,6 @@ function Analyzer(BankStrategy, opts) {
 }
 
 Analyzer.prototype.isType = function(type, row) {
-  var desc = row.description,
-    _this = this;
 
   // if type is already set, don't match again
   if (row.type) {
@@ -33,8 +31,8 @@ Analyzer.prototype.isType = function(type, row) {
   // get the type from the first matching pattern against the description
   return _.some(this.strategy.patterns[type], function(pattern) {
     var re = new RegExp(pattern, 'i');
-    if (re.test(desc)) {
-      _this._typeRE = re; // save RegExp to extract data
+    if (re.test(row.description)) {
+      row._dsMatches = re.exec(row.description); // expose description regexp matches
       return true;
     }
     return false;
@@ -51,17 +49,14 @@ Analyzer.prototype.analyze = function(row) {
   });
 
   if (!row.type) {
-    console.log('unknown type', row.description);
+    row.type = 'unknown';
+    console.log('WARN: unknown type for the desc="' + row.description + '"');
   }
+
   row.date = this.strategy.parseDate(row.date);
-  row.amount = this.strategy.parseMoney(row.amount);
-  row.balance = this.strategy.parseMoney(row.balance);
   row.ds = row.description;
 
-  // TODO: add all optional fields
-  if (row.hasOwnProperty('valDate')) {
-    row.valDate = this.strategy.parseDate(row.valDate);
-  }
+  this.strategy.parseFields(row);
 
   return row;
 

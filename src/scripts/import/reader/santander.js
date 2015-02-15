@@ -16,8 +16,6 @@ colMap = {
 module.exports = {
   fileExtension: '*.xlsx',
   mapLines: function(file, lineIterator, callback) {
-    console.log('processing file[' + file + ']...');
-
     var workbook = XLSX.readFile(file),
       txs = [],
       newRow,

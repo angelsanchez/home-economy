@@ -32,9 +32,14 @@ module.exports = IngStrategy = function(opts) {
 };
 
 IngStrategy.prototype.parseDate = function(str) {
-  return moment(str + ' 00:00:00', this.DATE_MASK);
+  return moment(str + ' 00:00:00', this.DATE_MASK).toDate();
 };
 
 IngStrategy.prototype.parseMoney = function(str) {
   return (str && str.toString().match(this.MONEY_REGEX)) ? parseFloat(str.replace(/\./, '').replace(/,/, '.'), 10) : str;
+};
+
+IngStrategy.prototype.parseFields = function(row) {
+  row.amount = this.parseMoney(row.amount);
+  row.balance = this.parseMoney(row.balance);
 };
