@@ -1,18 +1,11 @@
 var async = require('async'),
   glob = require('glob'),
-  mongoose = require('mongoose'),
   _ = require('lodash'),
   path = require('path'),
   analyzer = require('./analyzer'),
   reader = require('./reader'),
-  Transaction = require('../../api/model/transaction'),
-  conn, stats;
-
-stats = {
-  files: 0,
-  transactions: 0,
-  errors: []
-};
+  db = require('../db'),
+  stats;
 
 module.exports = {
 
@@ -24,32 +17,28 @@ module.exports = {
 
     processCallback = (processCallback || endImport);
 
+    stats = {
+      files: 0,
+      transactions: 0,
+      errors: []
+    };
+
     async.series({
-      connect: function(next) {
-        console.log('connecting to mongo');
-        conn = mongoose.connect('mongodb://localhost:27017/home_economy', next);
-      },
+      connect: db.connect,
       drop: function(next) {
-        if (!opts.truncate) {
-          return next();
-        }
-        console.log('dropping database');
-        mongoose.connection.db.dropDatabase(next);
+        if (!opts.truncate) return next();
+        db.drop(next);
       },
       process: function(next) {
         console.log('starting import for %s in %s', type, paths);
         importFiles(type, paths, next);
-
-      },
-      close: function(next) {
-        console.log('closing connection');
-        conn.disconnect();
-        next();
       }
     }, function(err) {
 
-      processCallback(err, stats);
+      // close db connection in all cases
+      db.close();
 
+      processCallback(err, stats);
     });
   }
 };
@@ -69,7 +58,7 @@ function importFiles(type, path, filesCallback) {
 
       typeReader.mapLines(file, function(row, cb) {
 
-        insertTransaction(typeAnalyzer.analyze(row), function(err, res) {
+        db.insertTx(typeAnalyzer.analyze(row), function(err, res) {
           if (err) {
             stats.errors.push(err);
           } else {
@@ -84,11 +73,6 @@ function importFiles(type, path, filesCallback) {
 
   });
 
-}
-
-function insertTransaction(row, callback) {
-  var tx = new Transaction(row);
-  tx.save(callback);
 }
 
 function endImport(err, stats) {
