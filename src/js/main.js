@@ -1,10 +1,11 @@
 var importScript = require('./scripts/import/index.js');
 
 function init() {
-  document.getElementById('btn_import').onclick = function() {
+  $('#btn_import').click(function() {
 
     $('#import_ok').toggleClass('hidden', true);
     $('#import_ko').toggleClass('hidden', true);
+    $('#import_file').parent().toggleClass('has-error', false);
 
     var dir = $('#import_file').val(),
       type = $('#import_type').val(),
@@ -15,7 +16,10 @@ function init() {
         recursive: recursive
       };
 
-    if (!dir) return; // TODO put input folder in invalid_state or use a validator
+    if (!dir) {
+      $('#import_file').parent().toggleClass('has-error', true);
+      return false;
+    }
 
     importScript.run(opts, function(err, result) {
       if (err) $('#import_ko').toggleClass('hidden', false);
@@ -25,5 +29,5 @@ function init() {
         $('#import_ok').toggleClass('hidden', false);
       }
     });
-  };
+  });
 }
