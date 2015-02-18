@@ -2,6 +2,27 @@
 
 ## Development
 
+### Troubleshooting
+
+Problem:
+```
+$ npm start
+
+> home-economy@0.1.0 start /igz/src/home-economy
+> nodewebkit
+
+/igz/src/home-economy/node_modules/nodewebkit/nodewebkit/nw: error while loading shared libraries: libudev.so.0: cannot open shared object file: No such file or directory
+```
+
+Solution (in Fedora):
+```
+$ locate libudev.so.1
+/usr/lib64/libudev.so.1
+/usr/lib64/libudev.so.1.4.0
+
+$ sudo ln -s /usr/lib64/libudev.so.1 /usr/lib64/libudev.so.0
+```
+
 ### Install bower dependencies
 
 ```sh
