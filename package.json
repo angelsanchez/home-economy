@@ -24,6 +24,7 @@
     "lodash": "^3.1.0",
     "moment": "^2.9.0",
     "mongoose": "^3.8.21",
+    "tungus": "0.0.4",
     "nodewebkit": "^0.11.6",
     "xlsx": "^0.7.12",
     "yargs": "^2.1.1"
@@ -37,6 +38,6 @@
   "window": {
     "toolbar": false,
     "width": 800,
-    "height": 600
+    "height": 500
   }
 }

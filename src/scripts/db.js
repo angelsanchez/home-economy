@@ -1,13 +1,14 @@
-var mongoose = require('mongoose'),
-  cfg = require('../../config/app.json'),
+var tungus = require('tungus'),
+  mongoose = require('mongoose'),
   Transaction = require('./model/transaction'),
   conn;
 
 module.exports = {
 
   connect: function(next) {
-    console.log('connecting to: %s', cfg.db.conn);
-    conn = mongoose.connect(cfg.db.conn, next);
+    var connStr = 'tingodb://' + __dirname + '../../../data';
+    console.log('connecting to: %s', connStr);
+    conn = mongoose.connect(connStr, next);
   },
   drop: function(next) {
     console.log('dropping database');
@@ -15,11 +16,10 @@ module.exports = {
   },
   close: function() {
     console.log('closing connection');
-    conn.disconnect();
+    mongoose.disconnect();
   },
   insertTx: function(row, callback) {
-    var tx = new Transaction(row);
-    tx.save(callback);
+    Transaction.create(row, callback);
   }
 
 };
