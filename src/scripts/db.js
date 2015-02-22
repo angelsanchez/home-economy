@@ -3,6 +3,8 @@ var mongoose = require('mongoose'),
   Transaction = require('./model/transaction'),
   conn;
 
+mongoose.set('debug', true);
+
 module.exports = {
 
   connect: function(next) {

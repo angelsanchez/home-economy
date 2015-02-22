@@ -1,6 +1,12 @@
 var importScript = require('./scripts/import/index.js');
 
-function init() {
+$(document).ready(function() {
+
+  $('#tabs').find('a').click(function(e) {
+    e.preventDefault();
+    $(this).tab('show');
+  });
+
   $('#btn_import').click(function() {
 
     $('#import_ok').toggleClass('hidden', true);
@@ -30,4 +36,4 @@ function init() {
       }
     });
   });
-}
+});
