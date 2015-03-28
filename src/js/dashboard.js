@@ -1,23 +1,13 @@
 var transactions = require('./scripts/manager/transaction'),
-  moment = require('moment'),
-  async = require('async'),
-  db = require('./scripts/db.js');
+  moment = require('moment');
 
 $(document).ready(function() {
   console.log('Searching txs...');
 
-  // TODO manage better the db connection (only one connection?)
-  async.series({
-    connect: db.connect,
-    process: printTxTable
-  }, function(err) {
-    if (err) console.error(err);
-    // close db connection in all cases
-    db.close();
-  });
+  printTxTable();
 });
 
-function printTxTable(done) {
+function printTxTable() {
   transactions.find(function(err, txs) {
     if (err) return console.error(err);
 
@@ -33,6 +23,5 @@ function printTxTable(done) {
         $rows.append($tr);
       });
     }
-    done();
   });
 }

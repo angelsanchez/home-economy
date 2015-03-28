@@ -23,10 +23,10 @@
     "glob": "^4.3.5",
     "lodash": "^3.1.0",
     "moment": "^2.9.0",
-    "mongoose": "^3.8.21",
     "nodewebkit": "^0.11.6",
     "xlsx": "^0.7.12",
-    "yargs": "^2.1.1"
+    "yargs": "^2.1.1",
+    "nedb": "^1.1.1"
   },
   "devDependencies": {
     "jscs": "^1.10.0",

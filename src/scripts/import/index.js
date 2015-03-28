@@ -4,7 +4,7 @@ var async = require('async'),
   path = require('path'),
   analyzer = require('./analyzer'),
   reader = require('./reader'),
-  db = require('../db'),
+  transactions = require('../manager/transaction'),
   stats;
 
 module.exports = {
@@ -23,21 +23,18 @@ module.exports = {
       errors: []
     };
 
-    async.series({
-      connect: db.connect,
-      drop: function(next) {
+    async.series([
+      function(next) {
         if (!opts.truncate) return next();
-        db.drop(next);
+        transactions.drop(next);
       },
-      process: function(next) {
+
+      function(next) {
         console.log('starting import for %s in %s', type, paths);
         importFiles(type, paths, next);
       }
-    }, function(err) {
 
-      // close db connection in all cases
-      db.close();
-
+    ], function(err) {
       processCallback(err, stats);
     });
   }
@@ -58,12 +55,13 @@ function importFiles(type, path, filesCallback) {
 
       typeReader.mapLines(file, function(row, cb) {
 
-        db.insertTx(typeAnalyzer.analyze(row), function(err, res) {
+        transactions.insertTx(typeAnalyzer.analyze(row), function(err) {
           if (err) {
             stats.errors.push(err);
           } else {
             stats.transactions += 1;
           }
+
           cb(err);
         });
 
