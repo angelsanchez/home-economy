@@ -1,4 +1,3 @@
 {
-    "preset": "airbnb",
-    "disallowMultipleVarDecl": null
+    "preset": "airbnb"
 }

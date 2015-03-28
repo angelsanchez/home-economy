@@ -1,6 +1,7 @@
 var importScript = require('./scripts/import/index.js');
 
 $(document).ready(function() {
+  var $importFile = $('#import_file');
 
   $('#tabs').find('a').click(function(e) {
     e.preventDefault();
@@ -11,16 +12,16 @@ $(document).ready(function() {
 
     $('#import_ok').toggleClass('hidden', true);
     $('#import_ko').toggleClass('hidden', true);
-    $('#import_file').parent().toggleClass('has-error', false);
+    $importFile.parent().toggleClass('has-error', false);
 
-    var dir = $('#import_file').val(),
-      type = $('#import_type').val(),
-      recursive = $('#check_recursive').prop('checked'),
-      opts = {
-        path: dir,
-        type: type,
-        recursive: recursive
-      };
+    var dir = $importFile.val();
+    var type = $('#import_type').val();
+    var recursive = $('#check_recursive').prop('checked');
+    var opts = {
+      path: dir,
+      type: type,
+      recursive: recursive
+    };
 
     if (!dir) {
       $('#import_file').parent().toggleClass('has-error', true);
@@ -31,7 +32,7 @@ $(document).ready(function() {
       if (err) $('#import_ko').toggleClass('hidden', false);
       else {
         $('#total_tx').text(result.transactions);
-        $('#total_files').text(result.files);
+        $importFile.text(result.files);
         $('#import_ok').toggleClass('hidden', false);
       }
     });

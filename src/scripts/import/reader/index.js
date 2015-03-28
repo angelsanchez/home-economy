@@ -1,5 +1,5 @@
-var ingReader = require('./ing'),
-  santanderReader = require('./santander');
+var ingReader = require('./ing');
+var santanderReader = require('./santander');
 
 module.exports = {
   create: function(strategy) {

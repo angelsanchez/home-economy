@@ -1,12 +1,12 @@
-var XLSX = require('xlsx'),
-  path = require('path'),
-  fs = require('fs'),
-  async = require('async'),
-  colMap;
+var XLSX = require('xlsx');
+var path = require('path');
+var fs = require('fs');
+var async = require('async');
+var colMap;
 
 // relation between xlsx column names and the returned row property names
 colMap = {
-  B: 'date', // TODO opDate better name?
+  B: 'date',
   D: 'valDate',
   F: 'description',
   H: 'amount',
@@ -16,14 +16,16 @@ colMap = {
 module.exports = {
   fileExtension: '*.xlsx',
   mapLines: function(file, lineIterator, callback) {
-    var workbook = XLSX.readFile(file),
-      txs = [],
-      newRow,
-      tx,
-      fieldName,
-      row, rowName, rowVal,
-      matches,
-      col;
+    var workbook = XLSX.readFile(file);
+    var txs = [];
+    var newRow;
+    var tx;
+    var fieldName;
+    var row;
+    var rowName;
+    var rowVal;
+    var matches;
+    var col;
 
     workbook.SheetNames.forEach(function(sheetName) {
       var worksheet = workbook.Sheets[sheetName];
@@ -31,8 +33,10 @@ module.exports = {
         // skip inherit properties
         if (!worksheet.hasOwnProperty(rowName)) continue;
 
-        // rowName is like 'B16'
-        if (rowName[0] === '!') continue; // skip "!ref"
+        // a rowName is like 'B16'
+
+        // skip "!ref"
+        if (rowName[0] === '!') continue;
 
         matches = /([A-Z]+)(\d+)/.exec(rowName);
         col = matches[1];
@@ -46,6 +50,7 @@ module.exports = {
         if (!tx) {
           tx = txs[newRow] = {};
         }
+
         fieldName = colMap[col];
         if (fieldName) {
           rowVal = worksheet[rowName].v;

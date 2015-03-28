@@ -1,6 +1,6 @@
-var _ = require('lodash'),
-  IngStrategy = require('./ing'),
-  SantanderStrategy = require('./santander');
+var _ = require('lodash');
+var IngStrategy = require('./ing');
+var SantanderStrategy = require('./santander');
 
 module.exports = {
   create: function(strategy, opts) {
@@ -28,21 +28,25 @@ Analyzer.prototype.isType = function(type, row) {
   if (row.type) {
     return row.type === type;
   }
+
   // get the type from the first matching pattern against the description
   return _.some(this.strategy.patterns[type], function(pattern) {
     var re = new RegExp(pattern, 'i');
     if (re.test(row.description)) {
-      row._dsMatches = re.exec(row.description); // expose description regexp matches
+
+      // expose description regexp matches
+      row._dsMatches = re.exec(row.description);
       return true;
     }
+
     return false;
   });
 
 };
 
 Analyzer.prototype.analyze = function(row) {
-  var types = ['atm', 'bill', 'transfer', 'purchase', 'salary'],
-    _this = this;
+  var types = ['atm', 'bill', 'transfer', 'purchase', 'salary'];
+  var _this = this;
 
   row.type = _.find(types, function(type) {
     return _this.isType(type, row);
@@ -63,7 +67,7 @@ Analyzer.prototype.analyze = function(row) {
 };
 
 // shortcut methods
-
+/*
 Analyzer.prototype.isBill = function(row) {
   return this.strategy.isType('bill', row);
 };
@@ -83,3 +87,4 @@ Analyzer.prototype.isAtm = function(row) {
 Analyzer.prototype.isSalary = function(row) {
   return this.strategy.isType('salary', row);
 };
+*/

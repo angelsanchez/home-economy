@@ -1,13 +1,22 @@
-var csv = require('csv-stream'),
-  fs = require('fs'),
-  es = require('event-stream');
+var csv = require('csv-stream');
+var fs = require('fs');
+var es = require('event-stream');
 
 var cvsStreamOptions = {
-  delimiter: ',', // default is ,
-  endLine: '\n', // default is \n,
-  columns: ['date', 'description', 'amount', 'balance'], // by default read the first line and use values found as columns
-  escapeChar: '"', // default is an empty string
-  enclosedChar: '\'' // default is an empty string
+  // default is ,
+  delimiter: ',',
+
+  // default is \n,
+  endLine: '\n',
+
+  // by default read the first line and use values found as columns
+  columns: ['date', 'description', 'amount', 'balance'],
+
+  // default is an empty string
+  escapeChar: '"',
+
+  // default is an empty string
+  enclosedChar: '\''
 };
 var SKIP_ROWS = 4;
 

@@ -1,6 +1,6 @@
 {
   "name": "home-economy",
-  "version": "0.1.0",
+  "version": "0.1.0-SNAPSHOT",
   "description": "",
   "repository": {
     "type": "git",
@@ -9,8 +9,8 @@
   "main": "src/index.html",
   "scripts": {
     "start": "nodewebkit",
-    "jshint": "./node_modules/jshint/bin/jshint src/",
-    "jscs": "./node_modules/jscs/bin/jscs src/",
+    "jshint": "./node_modules/jshint/bin/jshint src/scripts src/js",
+    "jscs": "./node_modules/jscs/bin/jscs src/scripts src/js",
     "lint": "npm run jscs && npm run jshint",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

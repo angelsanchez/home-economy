@@ -1,7 +1,7 @@
-var Datastore = require('nedb'),
-  path = require('path'),
-  dbFilename = path.join(window.require('nw.gui').App.dataPath, 'tx.db'),
-  db = new Datastore({filename: dbFilename, autoload: true});
+var Datastore = require('nedb');
+var path = require('path');
+var dbFilename = path.join(window.require('nw.gui').App.dataPath, 'tx.db');
+var db = new Datastore({filename: dbFilename, autoload: true});
 
 console.log('dbFilename = %s', dbFilename);
 

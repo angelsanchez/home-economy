@@ -1,6 +1,6 @@
-var _ = require('lodash'),
-  moment = require('moment'),
-  IngStrategy;
+var _ = require('lodash');
+var moment = require('moment');
+var IngStrategy;
 
 module.exports = IngStrategy = function(opts) {
   this.opts = opts;
@@ -12,9 +12,7 @@ module.exports = IngStrategy = function(opts) {
     atm: [
       '^Reintegro efectivo'
     ],
-    bill: [
-      // TODO: find the matching pattern for billing
-    ],
+    bill: [/*TODO: find the matching pattern for billing*/],
     transfer: [
       '^Transferencia recibida',
       '^Traspaso emitido'

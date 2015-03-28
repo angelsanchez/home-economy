@@ -1,5 +1,5 @@
-var transactions = require('./scripts/manager/transaction'),
-  moment = require('moment');
+var transactions = require('./scripts/manager/transaction');
+var moment = require('moment');
 
 $(document).ready(function() {
   console.log('Searching txs...');
@@ -11,7 +11,8 @@ function printTxTable() {
   transactions.find(function(err, txs) {
     if (err) return console.error(err);
 
-    var $tr, $rows = $('#transaction_rows');
+    var $tr;
+    var $rows = $('#transaction_rows');
 
     $rows.empty();
     if (txs) {

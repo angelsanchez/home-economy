@@ -1,6 +1,6 @@
-var _ = require('lodash'),
-  moment = require('moment'),
-  SantanderStrategy;
+var _ = require('lodash');
+var moment = require('moment');
+var SantanderStrategy;
 
 module.exports = SantanderStrategy = function(opts) {
   this.opts = opts;

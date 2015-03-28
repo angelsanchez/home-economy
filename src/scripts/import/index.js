@@ -1,19 +1,19 @@
-var async = require('async'),
-  glob = require('glob'),
-  _ = require('lodash'),
-  path = require('path'),
-  analyzer = require('./analyzer'),
-  reader = require('./reader'),
-  transactions = require('../manager/transaction'),
-  stats;
+var async = require('async');
+var glob = require('glob');
+var _ = require('lodash');
+var path = require('path');
+var analyzer = require('./analyzer');
+var reader = require('./reader');
+var transactions = require('../manager/transaction');
+var stats;
 
 module.exports = {
 
   run: function(opts, processCallback) {
 
-    var type = opts.type,
-      recursive = opts.recursive,
-      paths = path.resolve(opts.path) + (recursive ? '/**/' : '/');
+    var type = opts.type;
+    var recursive = opts.recursive;
+    var paths = path.resolve(opts.path) + (recursive ? '/**/' : '/');
 
     processCallback = (processCallback || endImport);
 
@@ -42,8 +42,8 @@ module.exports = {
 
 function importFiles(type, path, filesCallback) {
 
-  var typeReader = reader.create(type),
-    typeAnalyzer = analyzer.create(type);
+  var typeReader = reader.create(type);
+  var typeAnalyzer = analyzer.create(type);
 
   glob(path + typeReader.fileExtension, function(err, files) {
     if (err) throw err;
