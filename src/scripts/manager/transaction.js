@@ -1,6 +1,9 @@
 var Datastore = require('nedb'),
   path = require('path'),
-  db = new Datastore({filename: path.join(window.require('nw.gui').App.dataPath, 'something.db'), autoload: true});
+  dbFilename = path.join(window.require('nw.gui').App.dataPath, 'tx.db'),
+  db = new Datastore({filename: dbFilename, autoload: true});
+
+console.log('dbFilename = %s', dbFilename);
 
 module.exports = {
   find: function(callback) {
