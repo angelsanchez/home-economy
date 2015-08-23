@@ -2,27 +2,6 @@
 
 ## Development
 
-### Troubleshooting
-
-Problem:
-```
-$ npm start
-
-> home-economy@0.1.0 start /igz/src/home-economy
-> nodewebkit
-
-/igz/src/home-economy/node_modules/nodewebkit/nodewebkit/nw: error while loading shared libraries: libudev.so.0: cannot open shared object file: No such file or directory
-```
-
-Solution (in Fedora):
-```
-$ locate libudev.so.1
-/usr/lib64/libudev.so.1
-/usr/lib64/libudev.so.1.4.0
-
-$ sudo ln -s /usr/lib64/libudev.so.1 /usr/lib64/libudev.so.0
-```
-
 ### Install bower dependencies
 
 ```sh
@@ -78,26 +57,23 @@ __from__        | String | optional | Origin in a transfer TX   | santander
 __creditCard__  | String | optional | Credit card number used in TX | santander 
 
 
-### Query notes
+### Troubleshooting
 
-    db.transactions.aggregate([
-     { $group : { _id : '$type', total : { $sum : '$amount' } } },
-     { $sort : {total : 1} }
-    ])
+Problem:
+```
+$ npm start
 
-    db.transactions.aggregate([
-     { $match : {type : 'bill'} },
-     { $group : { _id : '$company', total : { $sum : '$amount' } } }
-    ])
+> home-economy@0.1.0 start /igz/src/home-economy
+> nodewebkit
 
+/igz/src/home-economy/node_modules/nodewebkit/nodewebkit/nw: error while loading shared libraries: libudev.so.0: cannot open shared object file: No such file or directory
+```
 
-    db.transactions.aggregate([
-     { $match : {type : 'purchase'} },
-     { $group : { _id : '$company', total : { $sum : '$amount' } } },
-     { $sort : {total : 1} }
-    ])
+Solution (in Fedora):
+```
+$ locate libudev.so.1
+/usr/lib64/libudev.so.1
+/usr/lib64/libudev.so.1.4.0
 
-    db.transactions.find({}).sort({balance:-1}).limit(1)
-
-    db.transactions.find({}).sort({balance:1}).limit(1)
-
+$ sudo ln -s /usr/lib64/libudev.so.1 /usr/lib64/libudev.so.0
+```

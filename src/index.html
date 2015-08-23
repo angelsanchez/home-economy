@@ -27,6 +27,9 @@
                         <a href="#dashboard">Dashboard</span></a>
                     </li>
                     <li role="presentation">
+                        <a href="#stats">Stats</a>
+                    </li>
+                    <li role="presentation">
                         <a href="#import">Import</a>
                     </li>
                 </ul>
@@ -48,6 +51,20 @@
                     </tr>
                     </thead>
                     <tbody id="transaction_rows">
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="stats" class="tab-pane" role="tabpanel">
+                <h2>Stats</h2>
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>Type</th>
+                        <th>Total amount</th>
+                    </tr>
+                    </thead>
+                    <tbody id="stats_rows">
                     </tbody>
                 </table>
             </div>
@@ -108,5 +125,6 @@
 
     <script src="./js/main.js" type="application/javascript"></script>
     <script src="./js/dashboard.js" type="application/javascript"></script>
+    <script src="./js/stats.js" type="application/javascript"></script>
 </body>
 </html>

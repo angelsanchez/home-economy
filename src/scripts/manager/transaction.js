@@ -16,5 +16,19 @@ module.exports = {
 
   drop: function(row, callback) {
     db.remove({}, {multi: true}, callback);
+  },
+
+  groupByType: function(callback) {
+    db.find({}, {multi: true}, function(err, docs) {
+      if (err) return callback(err);
+
+      var result = {};
+      docs.forEach(function(doc) {
+        if (!result[doc.type]) result[doc.type] = {sum:0};
+        result[doc.type].sum += doc.amount;
+      });
+
+      callback(null, result);
+    });
   }
 };
